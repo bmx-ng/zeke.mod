@@ -49,10 +49,10 @@ Import "-lluajit_x64"
 ModuleInfo "LD_OPTS: -L%PWD%/lib/win32"
 ?win32x64
 ModuleInfo "LD_OPTS: -L%PWD%/lib/win32"
-?macosx86
+?osxx86
 ModuleInfo "LD_OPTS: -L%PWD%/lib/macos"
 Import "-lluajit_x86"
-?macosx64
+?osxx64
 ModuleInfo "LD_OPTS: -L%PWD%/lib/macos"
 ModuleInfo "LD_OPTS: -pagezero_size 10000 -image_base 100000000"
 Import "-lluajit_x64"
