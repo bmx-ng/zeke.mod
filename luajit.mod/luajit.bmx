@@ -47,8 +47,10 @@ ModuleInfo "LD_OPTS: -L%PWD%/lib/linux"
 Import "-lluajit_x64"
 ?win32x86
 ModuleInfo "LD_OPTS: -L%PWD%/lib/win32"
+Import "-lluajit_x86"
 ?win32x64
 ModuleInfo "LD_OPTS: -L%PWD%/lib/win32"
+Import "-lluajit_x64"
 ?osxx86
 ModuleInfo "LD_OPTS: -L%PWD%/lib/macos"
 Import "-lluajit_x86"
