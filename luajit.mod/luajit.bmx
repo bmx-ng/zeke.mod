@@ -509,7 +509,7 @@ end rem
 Rem
 bbdoc: see <a href="../../../../mod/zeke.mod/luajit2.mod/LuaJIT-2.0.0/doc/api.html#luaJIT_setmode">LuaJIT doc</a>
 end rem
-	Function luaJIT_setmode:Int(lua_state:Byte Ptr , idx:Int , mode:Int)
+	Function luaJIT_setmode:Int(lua_state:Byte Ptr , idx:Int , Mode:Int)
 End Extern
 
 
@@ -739,7 +739,7 @@ end rem
     	If StringPtr = Null Then
       Return Null
     Else
-    	  Return String.fromBytes(StringPtr,Length)
+    	  Return String.fromBytes(StringPtr,Int(Length))
     End If
   End Function
 
@@ -750,10 +750,18 @@ end rem
 ' ******************************************************************************
 
 Extern
+?bmxng
+  Struct lua_Reg
+?Not bmxng
   Type lua_Reg
+?
     Field name:Byte Ptr                                         ' no ~0 expected
     Field func:Int(ls:Byte Ptr)
+?bmxng
+  End Struct
+?Not bmxng
   End Type
+?
 End Extern
 
 Extern
@@ -950,7 +958,7 @@ end rem
     If (StringPtr = Null) Then
       Return Null
     Else
-      Return String.fromBytes(StringPtr,Size)
+      Return String.fromBytes(StringPtr,Int(Size))
     End If
   End Function
 
@@ -1015,7 +1023,7 @@ end rem
     If (StringPtr = Null) Then
       Return Null
     Else
-      Return String.fromBytes(StringPtr,Size)
+      Return String.fromBytes(StringPtr,Int(Size))
     End If
   End Function
 
