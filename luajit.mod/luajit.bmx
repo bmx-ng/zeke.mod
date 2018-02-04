@@ -5,9 +5,11 @@ bbdoc: LuaJIT
 end rem
 Module zeke.luajit
 
-ModuleInfo "Version: 1.12"
+ModuleInfo "Version: 1.13"
 ModuleInfo "Author: Zeke"
 
+ModuleInfo "History: 1.13"
+ModuleInfo "History: Updated to LuaJIT 2.0.5"
 ModuleInfo "History: V1.12"
 ModuleInfo "History: Updated to LuaJIT 2.0.4"
 ModuleInfo "History: Added 64-bit support."
@@ -721,7 +723,11 @@ end rem
       Return Null
     Else
       Local Result:Byte[] = New Byte[Length]
-        MemCopy(Varptr Result[0], DataPtr, Length);
+?bmxng
+      MemCopy(Varptr Result[0], DataPtr, Size_T(Length))
+?Not bmxng
+      MemCopy(Varptr Result[0], DataPtr, Length)
+?
       Return Result
     End If
   End Function
