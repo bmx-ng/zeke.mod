@@ -90,13 +90,24 @@ Function Invoke( L:Byte Ptr )
 		End Select
 	Next
 	Local t:Object
+	Local returnType:TTypeId
 	If func Then
 		t = func.Invoke(args)
+?bmxng
+		returnType = func.ReturnType()
+?Not bmxng
+		returnType = func.TypeId()
+?
 	End If
 	If meth Then
 		t = meth.Invoke( obj,args )
+?bmxng
+		returnType = meth.ReturnType()
+?Not bmxng
+		returnType = meth.TypeId()
+?
 	End If
-	Select routine.TypeId()
+	Select returnType
 		Case IntTypeId, ShortTypeId, ByteTypeId
 			lua_pushinteger L,t.ToString().ToInt()
 		Case LongTypeId
@@ -107,7 +118,11 @@ Function Invoke( L:Byte Ptr )
 			lua_pushnumber L,t.ToString().ToDouble()
 		Case StringTypeId
 			Local s$=t.ToString()
+?bmxng
+			lua_pushlstring L,s,Size_T(s.length)
+?Not bmxng
 			lua_pushlstring L,s,s.length
+?
 		Default
 			lua_pushobject L,t
 	End Select
@@ -145,7 +160,11 @@ Function Index( L:Byte Ptr )
 				lua_pushnumber L,fld.GetDouble( obj )
 			Case StringTypeId
 				Local t:String = fld.GetString( obj )
+?bmxng
+				lua_pushlstring L,t,Size_T(t.length)
+?Not bmxng
 				lua_pushlstring L,t,t.length
+?
 			Default
 				lua_pushobject L,fld.Get( obj )
 		End Select
@@ -165,7 +184,11 @@ Function Index( L:Byte Ptr )
 				lua_pushnumber(L, constant.GetDouble())
 			Case StringTypeId
 				Local t:String = constant.GetString()
+?bmxng
+				lua_pushlstring(L, t, Size_T(t.length))
+?Not bmxng
 				lua_pushlstring(L, t, t.length)
+?
 		End Select
 		Return True
 	End If
@@ -278,7 +301,11 @@ Function lua_pusharray( L:Byte Ptr,obj:Object )
 				lua_pushnumber L, typeId.GetArrayElement(obj, i).ToString().ToDouble()
 			Case StringTypeId
 				Local s:String = typeId.GetArrayElement(obj, i).ToString()
+?bmxng
+				lua_pushlstring L, s, Size_T(s.length)
+?Not bmxng
 				lua_pushlstring L, s, s.length
+?
 			Case ArrayTypeId
 				lua_pusharray(L, typeId.GetArrayElement(obj, i))
 			Default ' for everything else, we just push the object..
@@ -361,7 +388,7 @@ Type TLuaObject
 	about:
 	@name should refer to a function within the object's classes' source code.
 	End Rem
-	Method Invoke:Object( name$,args:Object[] )
+	Method Invoke:String( name$,args:Object[] )
 		Local L:Byte Ptr=LuaState()
 	
 		lua_pushfenv
@@ -381,7 +408,11 @@ Type TLuaObject
 					lua_pushnumber L, args[i].ToString().ToDouble()
 				Case StringTypeId
 					Local s:String = args[i].ToString()
+?bmxng
+					lua_pushlstring L,s,Size_T(s.length)
+?Not bmxng
 					lua_pushlstring L,s,s.length
+?
 				Case ArrayTypeId
 					lua_pusharray(L, args[i])
 				Default
@@ -391,7 +422,7 @@ Type TLuaObject
 		If lua_pcall( L,args.length,1,0 ) LuaDumpErr
 		
 		
-		Local ret:Object
+		Local ret:String
 		If Not lua_isnil( L,-1 ) Then
 			' TODO: returning arrays from tables might be nice!
 			ret = lua_tostring( L, -1 )

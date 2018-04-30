@@ -5,9 +5,11 @@ bbdoc: LuaJIT
 end rem
 Module zeke.luajit
 
-ModuleInfo "Version: 1.13"
+ModuleInfo "Version: 1.14"
 ModuleInfo "Author: Zeke"
 
+ModuleInfo "History: 1.14"
+ModuleInfo "History: Fixed reflection issues."
 ModuleInfo "History: 1.13"
 ModuleInfo "History: Updated to LuaJIT 2.0.5"
 ModuleInfo "History: V1.12"
@@ -214,10 +216,10 @@ end rem
 Rem
 bbdoc: see <a href="../../../../mod/pub.mod/lua.mod/lua-5.1.4/doc/manual.html#lua_dump">Lua Reference Manual</a>
 end rem
-?Not ptr64
+?Not bmxng
   Function lua_dump:Int (lua_state:Byte Ptr, writer:Int(ls:Byte Ptr,p:Byte Ptr,sz:Int,ud:Byte Ptr), data:Byte Ptr)
-?ptr64
-  Function lua_dump:Int (lua_state:Byte Ptr, writer:Int(ls:Byte Ptr,p:Byte Ptr,sz:Long,ud:Byte Ptr), data:Byte Ptr)
+?bmxng
+  Function lua_dump:Int (lua_state:Byte Ptr, writer:Int(ls:Byte Ptr,p:Byte Ptr,sz:Size_T,ud:Byte Ptr), data:Byte Ptr)
 ?
 Rem
 bbdoc: see <a href="../../../../mod/pub.mod/lua.mod/lua-5.1.4/doc/manual.html#lua_equal">Lua Reference Manual</a>
@@ -298,18 +300,18 @@ end rem
 Rem
 bbdoc: see <a href="../../../../mod/pub.mod/lua.mod/lua-5.1.4/doc/manual.html#lua_load">Lua Reference Manual</a>
 end rem
-?Not ptr64
+?Not bmxng
   Function lua_load:Int (lua_state:Byte Ptr, reader:Byte Ptr(ls:Byte Ptr,data:Byte Ptr,sz:Int Ptr), data:Byte Ptr, chunkname$z) ' no ~0 expected
-?ptr64
-  Function lua_load:Int (lua_state:Byte Ptr, reader:Byte Ptr(ls:Byte Ptr,data:Byte Ptr,sz:Long Ptr), data:Byte Ptr, chunkname$z) ' no ~0 expected
+?bmxng
+  Function lua_load:Int (lua_state:Byte Ptr, reader:Byte Ptr(ls:Byte Ptr,data:Byte Ptr,sz:Size_T Ptr), data:Byte Ptr, chunkname$z) ' no ~0 expected
 ?
 Rem
 bbdoc: see <a href="../../../../mod/pub.mod/lua.mod/lua-5.1.4/doc/manual.html#lua_newstate">Lua Reference Manual</a>
 end rem
-?Not ptr64
+?Not bmxng
   Function lua_newstate:Byte Ptr (f:Byte Ptr(ud:Byte Ptr, p:Byte Ptr, osize:Int, nsize:Int), ud:Byte Ptr)
-?ptr64
-  Function lua_newstate:Byte Ptr (f:Byte Ptr(ud:Byte Ptr, p:Byte Ptr, osize:Long, nsize:Long), ud:Byte Ptr)
+?bmxng
+  Function lua_newstate:Byte Ptr (f:Byte Ptr(ud:Byte Ptr, p:Byte Ptr, osize:Size_T, nsize:Size_T), ud:Byte Ptr)
 ?
 Rem
 bbdoc: see <a href="../../../../mod/pub.mod/lua.mod/lua-5.1.4/doc/manual.html#lua_newthread">Lua Reference Manual</a>
@@ -318,10 +320,10 @@ end rem
 Rem
 bbdoc: see <a href="../../../../mod/pub.mod/lua.mod/lua-5.1.4/doc/manual.html#lua_newuserdata">Lua Reference Manual</a>
 end rem
-?Not ptr64
+?Not bmxng
   Function lua_newuserdata:Byte Ptr (lua_state:Byte Ptr, size:Int)
-?ptr64
-  Function lua_newuserdata:Byte Ptr (lua_state:Byte Ptr, size:Long)
+?bmxng
+  Function lua_newuserdata:Byte Ptr (lua_state:Byte Ptr, size:Size_T)
 ?
 Rem
 bbdoc: see <a href="../../../../mod/pub.mod/lua.mod/lua-5.1.4/doc/manual.html#lua_next">Lua Reference Manual</a>
@@ -330,10 +332,10 @@ end rem
 Rem
 bbdoc: see <a href="../../../../mod/pub.mod/lua.mod/lua-5.1.4/doc/manual.html#lua_objlen">Lua Reference Manual</a>
 end rem
-?Not ptr64
+?Not bmxng
   Function lua_objlen:Int (lua_state:Byte Ptr, index:Int)
-?ptr64
-  Function lua_objlen:Long (lua_state:Byte Ptr, index:Int)
+?bmxng
+  Function lua_objlen:Size_T (lua_state:Byte Ptr, index:Int)
 ?
 Rem
 bbdoc: see <a href="../../../../mod/pub.mod/lua.mod/lua-5.1.4/doc/manual.html#lua_pcall">Lua Reference Manual</a>
@@ -359,10 +361,10 @@ end rem
 Rem
 bbdoc: see <a href="../../../../mod/pub.mod/lua.mod/lua-5.1.4/doc/manual.html#lua_pushlstring">Lua Reference Manual</a>
 end rem
-?Not ptr64
+?Not bmxng
   Function lua_pushlstring (lua_state:Byte Ptr, s:Byte Ptr, size:Int)    ' without any conversion!
-?ptr64
-  Function lua_pushlstring (lua_state:Byte Ptr, s:Byte Ptr, size:Long)    ' without any conversion!
+?bmxng
+  Function lua_pushlstring (lua_state:Byte Ptr, s:Byte Ptr, size:Size_T)    ' without any conversion!
 ?
 Rem
 bbdoc: see <a href="../../../../mod/pub.mod/lua.mod/lua-5.1.4/doc/manual.html#lua_pushnil">Lua Reference Manual</a>
@@ -420,10 +422,10 @@ end rem
 Rem
 bbdoc: see <a href="../../../../mod/pub.mod/lua.mod/lua-5.1.4/doc/manual.html#lua_setallocf">Lua Reference Manual</a>
 end rem
-?Not ptr64
+?Not bmxng
   Function lua_setallocf (lua_state:Byte Ptr, f:Byte Ptr(ud:Byte Ptr, p:Byte Ptr, osize:Int, nsize:Int), ud:Byte Ptr)
-?ptr64
-  Function lua_setallocf (lua_state:Byte Ptr, f:Byte Ptr(ud:Byte Ptr, p:Byte Ptr, osize:Long, nsize:Long), ud:Byte Ptr)
+?bmxng
+  Function lua_setallocf (lua_state:Byte Ptr, f:Byte Ptr(ud:Byte Ptr, p:Byte Ptr, osize:Size_T, nsize:Size_T), ud:Byte Ptr)
 ?
 Rem
 bbdoc: see <a href="../../../../mod/pub.mod/lua.mod/lua-5.1.4/doc/manual.html#lua_setfenv">Lua Reference Manual</a>
@@ -467,11 +469,11 @@ end rem
   Function lua_tointeger:Int (lua_state:Byte Ptr, index:Int)
 Rem
 bbdoc: see <a href="../../../../mod/pub.mod/lua.mod/lua-5.1.4/doc/manual.html#lua_tolstring">Lua Reference Manual</a>
-end rem
-?Not ptr64
+End Rem
+?Not bmxng
   Function lua_tolstring:Byte Ptr (lua_state:Byte Ptr, index:Int, size:Int Ptr) ' without any conversion!
-?ptr64
-  Function lua_tolstring:Byte Ptr (lua_state:Byte Ptr, index:Int, size:Long Ptr) ' without any conversion!
+?bmxng
+  Function lua_tolstring:Byte Ptr (lua_state:Byte Ptr, index:Int, size:Size_T Ptr) ' without any conversion!
 ?
 Rem
 bbdoc: see <a href="../../../../mod/pub.mod/lua.mod/lua-5.1.4/doc/manual.html#lua_tonumber">Lua Reference Manual</a>
@@ -687,7 +689,7 @@ end rem
   End Function
 
   Function lua_pushbytearray (lua_state:Byte Ptr, Buffer:Byte[])
-    lua_pushlstring(lua_state, Varptr Buffer[0], Buffer.length)
+    lua_pushlstring(lua_state, Varptr Buffer[0], Size_T(Buffer.length))
   End Function
 
 Rem
@@ -713,9 +715,9 @@ end rem
   End Function
 
   Function lua_tobytearray:Byte[] (lua_state:Byte Ptr, index:Int)
-?ptr64
-    Local Length:Long
-?Not ptr64
+?bmxng
+    Local Length:Size_T
+?Not bmxng
    	Local Length:Int
 ?
     Local DataPtr:Byte Ptr = lua_tolstring(lua_state, index, Varptr Length)
@@ -736,9 +738,9 @@ Rem
 bbdoc: see <a href="../../../../mod/pub.mod/lua.mod/lua-5.1.4/doc/manual.html#lua_tostring">Lua Reference Manual</a>
 end rem
   Function lua_tostring:String (lua_state:Byte Ptr, index:Int)
-?ptr64
-    Local Length:Long
-?Not ptr64
+?bmxng
+    Local Length:Size_T
+?Not bmxng
    	Local Length:Int
 ?
     Local StringPtr:Byte Ptr = lua_tolstring(lua_state, index, Varptr Length)
@@ -774,10 +776,10 @@ Extern
 Rem
 bbdoc: see <a href="../../../../mod/pub.mod/lua.mod/lua-5.1.4/doc/manual.html#luaL_addlstring">Lua Reference Manual</a>
 end rem
-?Not ptr64
+?Not bmxng
   Function luaL_addlstring (B:Byte Ptr, s:Byte Ptr, l:Int)
-?ptr64
-  Function luaL_addlstring (B:Byte Ptr, s:Byte Ptr, l:Long)
+?bmxng
+  Function luaL_addlstring (B:Byte Ptr, s:Byte Ptr, l:Size_T)
 ?
 Rem
 bbdoc: see <a href="../../../../mod/pub.mod/lua.mod/lua-5.1.4/doc/manual.html#luaL_addsize">Lua Reference Manual</a>
@@ -814,10 +816,10 @@ end rem
 Rem
 bbdoc: see <a href="../../../../mod/pub.mod/lua.mod/lua-5.1.4/doc/manual.html#luaL_checklstring">Lua Reference Manual</a>
 end rem
-?Not ptr64
+?Not bmxng
   Function luaL_checklstring:Byte Ptr (lua_state:Byte Ptr, narg:Int, size:Int Ptr)
-?ptr64
-  Function luaL_checklstring:Byte Ptr (lua_state:Byte Ptr, narg:Int, size:Long Ptr)
+?bmxng
+  Function luaL_checklstring:Byte Ptr (lua_state:Byte Ptr, narg:Int, size:Size_T Ptr)
 ?
 Rem
 bbdoc: see <a href="../../../../mod/pub.mod/lua.mod/lua-5.1.4/doc/manual.html#luaL_checknumber">Lua Reference Manual</a>
@@ -876,10 +878,10 @@ end rem
 Rem
 bbdoc: see <a href="../../../../mod/pub.mod/lua.mod/lua-5.1.4/doc/manual.html#luaL_optlstring">Lua Reference Manual</a>
 end rem
-?Not ptr64
+?Not bmxng
   Function luaL_optlstring:Byte Ptr (lua_state:Byte Ptr, narg:Int, d$z, size:Int Ptr) ' no ~0 expected in "d"
-?ptr64
-  Function luaL_optlstring:Byte Ptr (lua_state:Byte Ptr, narg:Int, d$z, size:Long Ptr) ' no ~0 expected in "d"
+?bmxng
+  Function luaL_optlstring:Byte Ptr (lua_state:Byte Ptr, narg:Int, d$z, size:Size_T Ptr) ' no ~0 expected in "d"
 ?
 Rem
 bbdoc: see <a href="../../../../mod/pub.mod/lua.mod/lua-5.1.4/doc/manual.html#luaL_optnumber">Lua Reference Manual</a>
@@ -954,11 +956,11 @@ Rem
 bbdoc: see <a href="../../../../mod/pub.mod/lua.mod/lua-5.1.4/doc/manual.html#luaL_checkstring">Lua Reference Manual</a>
 end rem
   Function luaL_checkstring:String (lua_state:Byte Ptr, narg:Int)
-?Not ptr64
+?Not bmxng
     Local Size:Int
     Local StringPtr:Byte Ptr = luaL_checklstring(lua_state, narg, Varptr Size)
-?ptr64
-    Local Size:Long
+?bmxng
+    Local Size:Size_T
     Local StringPtr:Byte Ptr = luaL_checklstring(lua_state, narg, Varptr Size)
 ?
     If (StringPtr = Null) Then
@@ -1019,11 +1021,11 @@ Rem
 bbdoc: see <a href="../../../../mod/pub.mod/lua.mod/lua-5.1.4/doc/manual.html#luaL_optstring">Lua Reference Manual</a>
 end rem
   Function luaL_optstring:String (lua_state:Byte Ptr, narg:Int, d:String)
-?Not ptr64
+?Not bmxng
     Local Size:Int
     Local StringPtr:Byte Ptr = luaL_optlstring(lua_state, narg, d, Varptr Size)
-?ptr64
-    Local Size:Long
+?bmxng
+    Local Size:Size_T
     Local StringPtr:Byte Ptr = luaL_optlstring(lua_state, narg, d, Varptr Size)
 ?
     If (StringPtr = Null) Then
