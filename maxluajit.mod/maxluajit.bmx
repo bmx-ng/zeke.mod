@@ -76,7 +76,7 @@ Function Invoke( L:Byte Ptr )
 	For Local i=0 Until args.length
 		Select tys[i]
 		Case IntTypeId, ShortTypeId, ByteTypeId
-			args[i]=String.FromInt( lua_tointeger( L,i+1 ) )
+			args[i]=String.FromInt( Int(lua_tointeger( L,i+1 )) )
 		Case LongTypeId
 			args[i]=String.FromLong( Long(lua_tonumber( L,i+1 )) )
 		Case FloatTypeId
@@ -219,7 +219,7 @@ Function NewIndex( L:Byte Ptr )
 				
 			Select fld.TypeId()
 				Case IntTypeId, ShortTypeId, ByteTypeId
-					fld.SetInt obj,lua_tointeger( L,3 )
+					fld.SetInt obj,Int(lua_tointeger( L,3 ))
 				Case LongTypeId
 					fld.SetLong obj,Long(lua_tonumber( L,3 ))
 				Case FloatTypeId
