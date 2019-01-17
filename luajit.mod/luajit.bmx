@@ -5,9 +5,13 @@ bbdoc: LuaJIT
 end rem
 Module zeke.luajit
 
-ModuleInfo "Version: 1.14"
+ModuleInfo "Version: 1.16"
 ModuleInfo "Author: Zeke"
 
+ModuleInfo "History: 1.16"
+ModuleInfo "History: Updated to LuaJIT 2.1.0-beta3.f0e865d."
+ModuleInfo "History: 1.15"
+ModuleInfo "History: Fixed lua_integer size for 64-bit."
 ModuleInfo "History: 1.14"
 ModuleInfo "History: Fixed reflection issues."
 ModuleInfo "History: 1.13"
